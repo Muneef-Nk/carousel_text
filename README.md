@@ -55,6 +55,10 @@ You can choose between different animation styles:
 | `autoStart`       | `bool`                | `true`       | Whether animation starts automatically. |
 
 
-## Credits  
-CarouselText is developed and maintained by [GitHub](https://github.com/Muneef-Nk/).
 
+## Bugs
+If you encounter any problems, feel free to open an issue.
+
+
+## Credits  
+CarouselText is developed and maintained by [Muneef Nk](https://github.com/Muneef-Nk/).
