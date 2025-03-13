@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 enum AnimationType { typing, fade, slide }
 
 /// A widget that rotates words with different animation styles
-class CarouselWord extends StatefulWidget {
+class CarouselText extends StatefulWidget {
   final String fixedText; // Fixed part of the text that does not change
   final List<String> rotatingWords; // Words that will rotate
   final Duration typingSpeed; // Speed of typing animation (per character)
@@ -19,7 +19,7 @@ class CarouselWord extends StatefulWidget {
   final bool loop; // Whether to loop through words continuously
   final bool autoStart; // Whether animation should start automatically
 
-  const CarouselWord({
+  const CarouselText({
     required this.fixedText,
     required this.rotatingWords,
     this.typingSpeed = const Duration(milliseconds: 100),
@@ -35,15 +35,17 @@ class CarouselWord extends StatefulWidget {
   });
 
   @override
-  State<CarouselWord> createState() => _CarouselWordState();
+  State<CarouselText> createState() => _CarouselTextState();
 }
 
-class _CarouselWordState extends State<CarouselWord> with SingleTickerProviderStateMixin {
+class _CarouselTextState extends State<CarouselText>
+    with SingleTickerProviderStateMixin {
   late int _currentWordIndex; // Index of the currently displayed word
   String _displayedText = ""; // Text displayed in typing animation
   bool _isTyping = true; // Whether typing animation is ongoing
   Timer? _timer; // Timer for managing animation timing
-  late AnimationController _animationController; // Controls fade and slide animations
+  late AnimationController
+  _animationController; // Controls fade and slide animations
   late Animation<double> _fadeAnimation; // Fade transition animation
   late Animation<Offset> _slideAnimation; // Slide transition animation
 
@@ -53,13 +55,23 @@ class _CarouselWordState extends State<CarouselWord> with SingleTickerProviderSt
     _currentWordIndex = 0;
 
     // Initialize animation controller
-    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
+    _animationController = AnimationController(
+      duration: widget.transitionDuration,
+      vsync: this,
+    );
 
     // Define fade animation (opacity transition)
-    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
     // Define slide animation (word moves from bottom to top)
-    _slideAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 1),
+      end: const Offset(0, 0),
+    ).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+    );
 
     // Start animation automatically if enabled
     if (widget.autoStart) {
@@ -111,7 +123,10 @@ class _CarouselWordState extends State<CarouselWord> with SingleTickerProviderSt
       _timer = Timer.periodic(widget.eraseSpeed, (timer) {
         if (_displayedText.isNotEmpty) {
           setState(() {
-            _displayedText = _displayedText.substring(0, _displayedText.length - 1);
+            _displayedText = _displayedText.substring(
+              0,
+              _displayedText.length - 1,
+            );
           });
         } else {
           timer.cancel();
@@ -177,15 +192,31 @@ class _CarouselWordState extends State<CarouselWord> with SingleTickerProviderSt
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(_displayedText, style: widget.rotatingTextStyle),
-            if (_isTyping) Text("|", style: widget.rotatingTextStyle), // Blinking cursor effect
+            if (_isTyping)
+              Text(
+                "|",
+                style: widget.rotatingTextStyle,
+              ), // Blinking cursor effect
           ],
         );
 
       case AnimationType.fade:
-        return FadeTransition(opacity: _fadeAnimation, child: Text(widget.rotatingWords[_currentWordIndex], style: widget.rotatingTextStyle));
+        return FadeTransition(
+          opacity: _fadeAnimation,
+          child: Text(
+            widget.rotatingWords[_currentWordIndex],
+            style: widget.rotatingTextStyle,
+          ),
+        );
 
       case AnimationType.slide:
-        return SlideTransition(position: _slideAnimation, child: Text(widget.rotatingWords[_currentWordIndex], style: widget.rotatingTextStyle));
+        return SlideTransition(
+          position: _slideAnimation,
+          child: Text(
+            widget.rotatingWords[_currentWordIndex],
+            style: widget.rotatingTextStyle,
+          ),
+        );
     }
   }
 }

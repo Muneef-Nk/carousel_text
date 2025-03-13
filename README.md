@@ -1,6 +1,6 @@
-# CarouselWord
+# CarouselText
 
-CarouselWord is a customizable animated text widget for Flutter applications. It allows you to rotate words dynamically using different animations like typing, fading, and sliding effects.
+CarouselText is a customizable animated text widget for Flutter applications. It allows you to rotate words dynamically using different animations like typing, fading, and sliding effects.
 
 ## 📌 Features
 - 🎨 **Multiple animation types**: Typing, Fade, Slide
@@ -23,10 +23,10 @@ flutter pub get
 ```
 
 ## 🔥 Usage
-Import the package and use `CarouselWord`:
+Import the package and use `CarouselText`:
 
 ```dart
-CarouselWord(
+CarouselText(
     fixedText: "Flutter is",
     rotatingWords: ["Awesome!", "Fast!", "Powerful!"],
     animationType: AnimationType.typing, // Choose: typing, fade, slide
@@ -54,5 +54,7 @@ You can choose between different animation styles:
 | `loop`            | `bool`                | `true`       | Whether the animation loops infinitely. |
 | `autoStart`       | `bool`                | `true`       | Whether animation starts automatically. |
 
-## 🐛 Bugs / Requests
-If you encounter any issues or have feature requests, please open an issue on the GitHub repository.
+
+## Credits  
+CarouselText is developed and maintained by [GitHub](https://github.com/Muneef-Nk/).
+
