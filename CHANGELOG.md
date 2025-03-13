@@ -1,8 +1,8 @@
-## 0.0.6
-## Added
-- Improved overall stability and minor optimizations.
+## 0.0.7
+- Moved the example folder from lib/ to the root directory.
 
-## Fixed
+## 0.0.6
+- Improved overall stability and minor optimizations.
 - Resolved formatting issues reported by `dart format`.
 - Fixed minor warnings detected during `dart analyze`.
 
